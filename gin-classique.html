@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LA LIGNE ROUGE — LA LIGNE ROUGE GIN</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --red:#B9212A;--red2:#8B1820;--cream:#F5F0E8;
+    --dark:#1A1410;--muted:#8a7a6a;--border:#e8e0d4;--bg:#FAF8F4;--r:14px;
+  }
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--dark);max-width:430px;margin:0 auto;font-size:14.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+  .hd{background:var(--dark);position:relative;overflow:hidden;}
+  .hd-img{width:100%;height:340px;object-fit:cover;object-position:center top;display:block;opacity:.85;}
+  .hd-img-placeholder{width:100%;height:340px;background:linear-gradient(160deg,#2a1a10 0%,#1a0a08 100%);display:flex;align-items:center;justify-content:center;}
+  .hd-overlay{position:absolute;bottom:0;left:0;right:0;padding:28px 24px 32px;background:linear-gradient(to top, rgba(20,10,8,.97) 0%, rgba(20,10,8,.5) 65%, transparent 100%);}
+  .hd-brand{font-size:9px;color:var(--red);letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:10px;}
+  .hd-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;font-weight:700;color:#fff;line-height:1.05;}
+  .hd-sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-style:italic;color:rgba(255,255,255,.55);margin-top:6px;}
+
+  .redline{height:3px;background:linear-gradient(90deg, var(--red) 0%, var(--red2) 55%, transparent 100%);}
+
+  .tags{display:flex;gap:6px;padding:12px 16px;background:var(--dark);overflow-x:auto;scrollbar-width:none;}
+  .tags::-webkit-scrollbar{display:none}
+  .tag{flex-shrink:0;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 13px;border-radius:2px;white-space:nowrap;}
+  .tag-red{background:var(--red);color:#fff;}
+  .tag-out{background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);}
+
+  .main{padding:0 0 56px}
+
+  .card{margin:14px 14px 0;background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);}
+  .card-hd{padding:14px 20px 13px;border-bottom:1px solid var(--border);}
+  .card-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--red);}
+  .card-body{padding:18px 20px}
+
+  .story-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.2;}
+  .story-text{font-size:14.5px;line-height:1.8;color:#2a2218;}
+  .story-text p{margin-bottom:14px}
+  .story-text p:last-child{margin-bottom:0}
+
+  .notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px;}
+  .note{background:var(--cream);border-radius:8px;padding:14px 16px;border-top:2px solid var(--red);}
+  .note-name{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+  .note-desc{font-size:11px;color:var(--muted);letter-spacing:.3px;}
+
+  .chef-box{background:var(--cream);border-radius:10px;padding:16px 18px;border-left:3px solid var(--red);}
+  .chef-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+  .chef-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:4px;}
+  .chef-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+
+  .dark-section{margin:14px 14px 0;background:var(--dark);border-radius:var(--r);padding:24px 22px;}
+  .dark-eye{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+  .dark-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:12px;line-height:1.25;}
+  .dark-text{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.68);}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .info-cell{padding:12px 0;border-bottom:1px solid #f0e8e0;}
+  .info-cell:nth-child(odd){padding-right:16px;border-right:1px solid #f0e8e0;}
+  .info-cell:nth-child(even){padding-left:16px;}
+  .info-cell:nth-last-child(-n+2){border-bottom:none;}
+  .info-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+  .info-val{font-size:14px;font-weight:500;color:var(--dark);}
+
+  .ft{margin:14px 14px 0;border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;text-align:center;background:#fff;}
+  .ft-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:11px;letter-spacing:3px;color:var(--red);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+  .ft-name{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:4px;}
+  .ft-info{font-size:12px;color:var(--muted);line-height:1.7;}
+  .ft-warn{margin-top:14px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;line-height:1.6;font-style:italic;}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-img-placeholder">
+      <svg width="110" height="110" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 30 L80 30" stroke="#B9212A" stroke-width="4" stroke-linecap="round"/>
+        <path d="M20 42 L80 42 Q100 42 100 62 Q100 82 80 82 L60 82" stroke="#B9212A" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M20 54 L70 54 Q85 54 85 62 Q85 70 70 70 L60 70" stroke="#B9212A" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M60 82 L20 100" stroke="#B9212A" stroke-width="4" stroke-linecap="round"/>
+        <path d="M60 70 L30 100" stroke="#B9212A" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="52" cy="62" r="5" fill="#B9212A"/>
+      </svg>
+    </div>
+  <div class="hd-overlay">
+    <div class="hd-brand">Craft Gin &amp; Handmade — Gers, France</div>
+    <h1 class="hd-name">LA LIGNE ROUGE GIN</h1>
+    <div class="hd-sub">L'Alliance du Thé Oolong Rouge et de l'Ananas Grillé</div>
+  </div>
+</header>
+<div class="redline"></div>
+<div class="tags">
+  <span class="tag tag-red">Craft Gin</span>
+  <span class="tag tag-out">Distillé en France</span>
+  <span class="tag tag-out">Handmade</span>
+  <span class="tag tag-out">40% Vol.</span>
+</div>
+<main class="main">
+  
+  <div class="card">
+    <div class="card-hd"><div class="card-label">Histoire</div></div>
+    <div class="card-body">
+      <div class="story-title">Une ligne rouge tracée entre deux mondes</div>
+      <div class="story-text">
+        <p>Né dans le Gers, berceau de la gastronomie française, LA LIGNE ROUGE GIN est une oeuvre de précision. Il marie la noblesse d'un Thé Oolong Rouge rare, aux notes de miel et de fruits secs, à la douceur exotique d'une infusion d'ananas grillé.</p>
+        <p>Le seigle apporte ses notes épicées caractéristiques, tandis que les baies de genièvre offrent la fraîcheur inimitable qui définit les grands gins. Pas d'arôme artificiel, pas de colorant. Seule la magie de la distillation révèle l'identité de ce spiritueux d'exception.</p>
+        <p>Validé pour ses cocktails signature par Franck Putelat, Meilleur Ouvrier de France et Chef 2 étoiles Michelin, LA LIGNE ROUGE GIN s'inscrit comme une rupture dans le paysage des spiritueux artisanaux.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div class="card-label">Profil aromatique</div></div>
+    <div class="card-body">
+      <div class="notes-grid">
+        <div class="note"><div class="note-name">Thé Oolong Rouge</div><div class="note-desc">Miel et fruits secs</div></div>
+        <div class="note"><div class="note-name">Ananas Grillé</div><div class="note-desc">Douceur exotique</div></div>
+        <div class="note"><div class="note-name">Seigle</div><div class="note-desc">Notes épicées</div></div>
+        <div class="note"><div class="note-name">Baies de Genièvre</div><div class="note-desc">Fraîcheur</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div class="card-label">Validation</div></div>
+    <div class="card-body">
+      <div class="chef-box">
+        <div class="chef-title">Validé par</div>
+        <div class="chef-name">Franck Putelat</div>
+        <div class="chef-desc">Meilleur Ouvrier de France, 2 étoiles Michelin. Validé pour ses cocktails signature avec LA LIGNE ROUGE GIN.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dark-section">
+    <div class="dark-eye">La marque</div>
+    <div class="dark-title">Né dans le Gers, distillé avec passion</div>
+    <p class="dark-text">LA LIGNE ROUGE incarne la fusion entre tradition locale et modernité. Pas d'arôme, pas de colorant. Seul le temps du processus de distillation et nos procédés transforment notre spiritueux. Distillé et embouteillé en France par Organic Drinks Distribution.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div class="card-label">Informations produit</div></div>
+    <div class="card-body">
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-label">Volume</div><div class="info-val">70 cl</div></div>
+        <div class="info-cell"><div class="info-label">Degré</div><div class="info-val">40% Vol.</div></div>
+        <div class="info-cell"><div class="info-label">Origine</div><div class="info-val">France, Gers</div></div>
+        <div class="info-cell"><div class="info-label">Producteur</div><div class="info-val">ODD, Saint-Orens</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft">
+    <div class="ft-logo">La Ligne Rouge</div>
+    <div class="ft-name">SAS Organic Drinks Distribution</div>
+    <div class="ft-info">Saint-Orens-de-Gameville, France<br>info@alpha-organic-gin.com</div>
+    <div class="ft-warn">L'abus d'alcool est dangereux pour la santé. À consommer avec modération. Interdit aux mineurs de moins de 18 ans.</div>
+  </div>
+</main>
+</body>
+</html>
